@@ -3,30 +3,30 @@ const data = [
         id: 1,
         question: "Question one ?",
         answers: [
-            { answer: "Answer-1", isCorrect: true },
-            { answer: "Answer-2", isCorrect: false },
-            { answer: "Answer-3", isCorrect: false },
-            { answer: "Answer-4", isCorrect: false },
+            { answer: "True", isCorrect: true },
+            { answer: "False", isCorrect: false },
+            { answer: "False", isCorrect: false },
+            { answer: "False", isCorrect: false },
         ]
     },
     {
         id: 2,
         question: "Question two ?",
         answers: [
-            { answer: "Answer-1", isCorrect: true },
-            { answer: "Answer-2", isCorrect: false },
-            { answer: "Answer-3", isCorrect: false },
-            { answer: "Answer-4", isCorrect: false },
+            { answer: "True", isCorrect: true },
+            { answer: "False", isCorrect: false },
+            { answer: "False", isCorrect: false },
+            { answer: "False", isCorrect: false },
         ]
     },
     {
         id: 3,
         question: "Question three ?",
         answers: [
-            { answer: "Answer-1", isCorrect: true },
-            { answer: "Answer-2", isCorrect: false },
-            { answer: "Answer-3", isCorrect: false },
-            { answer: "Answer-4", isCorrect: false },
+            { answer: "True", isCorrect: true },
+            { answer: "False", isCorrect: false },
+            { answer: "False", isCorrect: false },
+            { answer: "False", isCorrect: false },
         ]
     },
 ]
@@ -46,10 +46,28 @@ let total = 0
 let selectedAnswer
 
 
+const playAgain = () => {
 
+    qIndex = 0
+    correctCount = 0
+    wrongCount = 0
+    total = 0
+
+    showQuestion(qIndex)
+}
+
+
+play.addEventListener("click", () => {
+
+    resultScreen.style.display = "none"
+    gameScreen.style.display = "block"
+
+    playAgain()
+})
 
 
 const showResult = () => {
+
     resultScreen.style.display = "block"
     gameScreen.style.display = "none"
 
@@ -60,7 +78,8 @@ const showResult = () => {
         `Wrong Answers: ${wrongCount}`
 
     resultScreen.querySelector(".score").textContent =
-        `Score: ${correctCount - wrongCount * 10}`
+        `Score: ${(correctCount - wrongCount) * 10}`
+
 }
 
 
@@ -82,19 +101,23 @@ const showQuestion = (qNumber) => {
     ).join("")
 
     selectAnswer()
+
 }
 
 
 const selectAnswer = () => {
+
     answersContainer.querySelectorAll("input").forEach(el => {
         el.addEventListener("click", (e) => {
             selectedAnswer = e.target.value
         })
     })
+
 }
 
 
 const submitAnswer = () => {
+
     submit.addEventListener("click", () => {
         if (selectedAnswer !== null) {
             selectedAnswer === "true" ? correctCount++ : wrongCount++
@@ -102,6 +125,7 @@ const submitAnswer = () => {
             showQuestion(qIndex)
         } else alert("Select an answer!")
     })
+
 }
 
 
